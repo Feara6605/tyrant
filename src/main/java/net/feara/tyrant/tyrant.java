@@ -75,7 +75,6 @@ public class tyrant {
     public tyrant(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-        modEventBus.register(YellowedKeyHandler.class);
         ModAttachments.register(modEventBus);
         ModIdentities.init();
         NeoForge.EVENT_BUS.register(IdentityEffectHandler.class);
