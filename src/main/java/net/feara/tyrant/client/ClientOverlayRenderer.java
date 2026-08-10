@@ -25,6 +25,41 @@ public class ClientOverlayRenderer {
                     "textures/overlay/yellowed_overlay.png"
             );
 
+    private static final ResourceLocation NONE_ICON =
+            ResourceLocation.fromNamespaceAndPath(
+                    "tyrant",
+                    "textures/gui/none_icon.png"
+            );
+
+    private static final ResourceLocation LOST_ICON =
+            ResourceLocation.fromNamespaceAndPath(
+                    "tyrant",
+                    "textures/gui/lost_icon.png"
+            );
+
+    private static final ResourceLocation CHARRED_ICON =
+            ResourceLocation.fromNamespaceAndPath(
+                    "tyrant",
+                    "textures/gui/charred_icon.png"
+            );
+    private static final ResourceLocation SWOONED_ICON =
+            ResourceLocation.fromNamespaceAndPath(
+                    "tyrant",
+                    "textures/gui/swooned_icon.png"
+            );
+
+    private static final ResourceLocation UNCHAINED_ICON =
+            ResourceLocation.fromNamespaceAndPath(
+                    "tyrant",
+                    "textures/gui/unchained_icon.png"
+            );
+
+    private static final ResourceLocation UNCHANGED_ICON =
+            ResourceLocation.fromNamespaceAndPath(
+                    "tyrant",
+                    "textures/gui/unchanged_icon.png"
+            );
+
     // Smooth overlay state
     private static float currentStrength = 0.0f;
 
@@ -41,6 +76,24 @@ public class ClientOverlayRenderer {
 
         if (ModIdentities.YELLOWED.id().equals(localId)) {
             gui.blit(YELLOWED_ICON, 10, 10, 0, 0, 16, 16, 16, 16);
+        }
+        if (ModIdentities.STRANDED.id().equals(localId)) {
+            gui.blit(LOST_ICON, 10, 10, 0, 0, 16, 16, 16, 16);
+        }
+        if (ModIdentities.SWOONED.id().equals(localId)) {
+            gui.blit(SWOONED_ICON, 10, 10, 0, 0, 16, 16, 16, 16);
+        }
+        if (ModIdentities.CHARRED.id().equals(localId)) {
+            gui.blit(CHARRED_ICON, 10, 10, 0, 0, 16, 16, 16, 16);
+        }
+        if (ModIdentities.UNCHAINED.id().equals(localId)) {
+            gui.blit(UNCHAINED_ICON, 10, 10, 0, 0, 16, 16, 16, 16);
+        }
+        if (ModIdentities.UNCHANGED.id().equals(localId)) {
+            gui.blit(UNCHANGED_ICON, 10, 10, 0, 0, 16, 16, 16, 16);
+        }
+        if (ModIdentities.NONE.id().equals(localId)) {
+            gui.blit(NONE_ICON, 10, 10, 0, 0, 16, 16, 16, 16);
         }
 
         float nearestDistance = IdentityLogicHelper.getNearestIdentityDistance(
