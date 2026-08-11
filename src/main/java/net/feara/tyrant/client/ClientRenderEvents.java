@@ -1,9 +1,8 @@
 package net.feara.tyrant.client;
 
-import net.feara.tyrant.identity.ModIdentities;
+import net.feara.tyrant.client.helpers.YellowedVisibility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.RenderPlayerEvent;
@@ -19,24 +18,20 @@ public final class ClientRenderEvents {
         Player target = event.getEntity();
         if (target == viewer) return;
 
-        ResourceLocation id = ClientIdentityCache.get(target.getUUID());
-        if (id == null || !id.equals(ModIdentities.YELLOWED.id())) return;
-        //System.out.println("ID: " + id);
-        var camera = Minecraft.getInstance()
-                .gameRenderer
-                .getMainCamera()
-                .getPosition();
+        if (YellowedVisibility.shouldHideFrom(viewer, target)) { //0.65 is current default but needs to be nerfed a bit according to agent
+            //event.setCanceled(true);
+            //target.setInvisible(true); //was for testing
+            YellowedVisibility.hideForRender(target);
+        }
+    }
 
-        var look = viewer.getLookAngle();
+    @SubscribeEvent
+    public static void onRenderPlayerPost(RenderPlayerEvent.Post event) {
+        LocalPlayer viewer = Minecraft.getInstance().player;
+        Player target = event.getEntity();
 
-        var toTarget = target.getEyePosition()
-                .subtract(camera)
-                .normalize();
-
-        double dot = look.normalize().dot(toTarget);
-
-        if (dot > 0.65) {
-            event.setCanceled(true);
+        if (!YellowedVisibility.shouldHideFrom(viewer, target)) {
+            YellowedVisibility.restoreAfterRender(target);
         }
     }
 }
