@@ -1,6 +1,7 @@
 package net.feara.tyrant;
 
 import net.feara.tyrant.identity.PlayerIdentityData;
+import net.feara.tyrant.identity.abilities.PlayerSpectateData;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.neoforged.bus.api.IEventBus;
@@ -11,6 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.UUID;
 import java.util.function.Supplier;
 
 public final class ModAttachments {
@@ -36,6 +38,10 @@ public final class ModAttachments {
                                        }
                             )
                             .copyOnDeath()
+                            .build());
+    public static final Supplier<AttachmentType<PlayerSpectateData>> PLAYER_SPECTATE =
+            ATTACHMENT_TYPES.register("player_spectate",
+                    () -> AttachmentType.<PlayerSpectateData>builder(PlayerSpectateData::new)
                             .build());
     public static void register(IEventBus modBus) {
         ATTACHMENT_TYPES.register(modBus);

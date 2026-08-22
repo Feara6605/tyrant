@@ -15,5 +15,22 @@ public final class ModNetwork {
                 IdentitySyncPayload.STREAM_CODEC,
                 IdentitySyncPayloadHandler::handleClient
         );
+        registrar.playToServer(
+                StartSpectatePayload.TYPE,
+                StartSpectatePayload.STREAM_CODEC,
+                SpectatePayloadHandler::handleStart
+        );
+
+        registrar.playToServer(
+                ChangeSpectateTargetPayload.TYPE,
+                ChangeSpectateTargetPayload.STREAM_CODEC,
+                SpectatePayloadHandler::handleChange
+        );
+
+        registrar.playToServer(
+                StopSpectatePayload.TYPE,
+                StopSpectatePayload.STREAM_CODEC,
+                SpectatePayloadHandler::handleStop
+        );
     }
 }

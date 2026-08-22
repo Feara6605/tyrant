@@ -3,6 +3,7 @@ package net.feara.tyrant.identity.abilities;
 import net.feara.tyrant.client.ClientIdentityCache;
 import net.feara.tyrant.client.input.YellowedKeyHandler;
 import net.feara.tyrant.identity.ModIdentities;
+import net.feara.tyrant.network.SpectateNetwork;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -44,6 +45,8 @@ public class SpectateAbility {
 
         mc.setCameraEntity(currentTarget);
         spectating = true;
+
+        SpectateNetwork.start(currentTarget.getUUID());
     }
 
     public static void exitSpectate() {
@@ -55,6 +58,7 @@ public class SpectateAbility {
         currentTarget = null;
         targetIndex = 0;
         spectating = false;
+        SpectateNetwork.stop();
     }
 
     public static void cycleTarget() {
@@ -69,6 +73,7 @@ public class SpectateAbility {
             targetIndex = Math.floorMod(targetIndex + 1, availableTargets.size());
             currentTarget = availableTargets.get(targetIndex);
             mc.setCameraEntity(currentTarget);
+            SpectateNetwork.changeTarget(currentTarget.getUUID());
         }
     }
 
