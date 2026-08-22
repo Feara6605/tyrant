@@ -1,7 +1,5 @@
 package net.feara.tyrant.network;
 
-import net.feara.tyrant.identity.IdentityManager;
-import net.feara.tyrant.identity.ModIdentities;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
